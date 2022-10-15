@@ -4,13 +4,13 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
+    justify-self: center;
 
 }
 
 @media (max-width: 880px) {
     .profile__about {
         margin: 14px auto 36px;
-        grid-column: 1/3;
     }
 
 }
