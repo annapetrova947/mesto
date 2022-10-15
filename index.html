@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pages/index.css">
+    <title>Mesto</title>
+</head>
+
+<body class="root">
+<div class="page">
+    <header class="header">
+        <img src="images/logo.svg" alt="Логотип" class="header__logo">
+        <hr class="header__line">
+    </header>
+    <main class="content">
+        <section class="profile">
+            <img src="images/avatar.jpg" alt="Аватар" class="profile__avatar">
+            <div class="profile__info">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <button type="button" class="profile__edit-button"></button>
+                <p class="profile__about">Исследователь океана</p>
+            </div>
+            <button class="profile__add-button" type="button"></button>
+        </section>
+        <section class="elements">
+            <div class="element">
+                <img src="images/el1.jpg" alt="Карачаевск" class="element__photo">
+                <h2 class="element__title">Карачаевск</h2>
+                <button type="button" class="element__like"></button>
+            </div>
+            <div class="element">
+                <img src="images/el2.jpg" alt="Гора Эльбрус" class="element__photo">
+                <h2 class="element__title">Гора Эльбрус</h2>
+                <button type="button" class="element__like"></button>
+            </div>
+            <div class="element">
+                <img src="images/el3.jpg" alt="Домбай" class="element__photo">
+                <h2 class="element__title">Домбай</h2>
+                <button type="button" class="element__like"></button>
+            </div>
+            <div class="element">
+                <img src="images/el2.jpg" alt="Гора Эльбрус" class="element__photo">
+                <h2 class="element__title">Гора Эльбрус</h2>
+                <button type="button" class="element__like"></button>
+            </div>
+            <div class="element">
+                <img src="images/el3.jpg" alt="Домбай" class="element__photo">
+                <h2 class="element__title">Домбай</h2>
+                <button type="button" class="element__like"></button>
+            </div>
+            <div class="element">
+                <img src="images/el1.jpg" alt="Карачаево-Черкесская Республика" class="element__photo">
+                <h2 class="element__title">Карачаево-Черкесская Республика</h2>
+                <button type="button" class="element__like"></button>
+            </div>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <p>&copy; 2022 Mesto Russia</p>
+    </footer>
+
+    <!-- The Modal -->
+    <div id="modal" class="modal">
+        <div class="modal__form">
+            <button class="modal__close" type="button"></button>
+            <form class="form">
+                <p class="form__title">Редактировать профиль</p>
+                <input id="name" type="text" name="name" class="form__input form__input_name">
+                <input id="about" type="text" name="about" class="form__input form__input_about">
+                <input type="submit" value="Сохранить" class="form__submit-button">
+            </form>
+        </div>
+    </div>
+</div>
+<script src="scripts/script.js"></script>
+</body>
+</html>
