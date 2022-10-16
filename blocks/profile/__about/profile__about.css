@@ -4,13 +4,21 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
-    justify-self: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 530px;
 
 }
 
 @media (max-width: 880px) {
     .profile__about {
         margin: 14px auto 36px;
+        max-width: 250px;
+        justify-self: center;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
     }
 
 }

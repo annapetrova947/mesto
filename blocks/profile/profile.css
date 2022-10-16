@@ -1,4 +1,5 @@
 .profile {
+    margin-top: 40px;
     display: grid;
     grid-template-columns: 120px 610px 150px;
     align-items: center;
@@ -7,6 +8,7 @@
 }
  @media (max-width: 880px) {
      .profile{
+         margin-top: 38px;
          display: flex;
          flex-direction: column;
          margin-bottom: 36px;

@@ -12,7 +12,7 @@
 <div class="page">
     <header class="header">
         <img src="images/logo.svg" alt="Логотип" class="header__logo">
-        <hr class="header__line">
+
     </header>
     <main class="content">
         <section class="profile">
@@ -66,11 +66,11 @@
     <div id="modal" class="modal">
         <div class="modal__form">
             <button class="modal__close" type="button"></button>
-            <form class="form">
-                <p class="form__title">Редактировать профиль</p>
-                <input id="name" type="text" name="name" class="form__input form__input_name">
-                <input id="about" type="text" name="about" class="form__input form__input_about">
-                <input type="submit" value="Сохранить" class="form__submit-button">
+            <form class="form" name="edit_form">
+                <h3 class="form__title">Редактировать профиль</h3>
+                <input id="name" type="text" name="name" class="form__input form__input_type_name">
+                <input id="about" type="text" name="about" class="form__input form__input_type_about">
+                <button type="submit" class="form__submit-button">Сохранить</button>
             </form>
         </div>
     </div>
