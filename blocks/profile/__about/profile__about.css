@@ -14,7 +14,7 @@
 @media (max-width: 880px) {
     .profile__about {
         margin: 14px auto 36px;
-        max-width: 250px;
+        max-width: 200px;
         justify-self: center;
         font-size: 14px;
         line-height: 17px;
