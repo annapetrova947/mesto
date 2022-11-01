@@ -10,6 +10,10 @@
     text-align: center;
 }
 
+.form__submit-button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
 @media (max-width: 880px) {
     .form__submit-button {
         font-size: 14px;

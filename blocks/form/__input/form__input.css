@@ -9,12 +9,12 @@
     color: black;
     height: 27px;
 }
-.form__input:last-child {
+.form__input:last-of-type {
     margin-bottom: 48px;
 }
 
 @media (max-width: 880px) {
-    .form__input:last-child {
+    .form__input:last-of-type {
         margin-bottom: 45px;
     }
 }
