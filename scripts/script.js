@@ -1,50 +1,51 @@
-let modalForEditProfile = document.querySelector('.modal_type_edit');
-let modalForAddCard = document.querySelector('.modal_type_add');
-let modalForPhoto = document.querySelector('.modal_type_photo');
-let buttonForEditProfile = document.querySelector('.profile__edit-button');
-let buttonForAddCard = document.querySelector('.profile__add-button');
-let spanToCloseEditModal = document.querySelector('.modal__close_edit');
-let spanToCloseAddModal = document.querySelector('.modal__close_add');
-let spanToClosePhotoModal = document.querySelectorAll('.modal__close_photo');
+const modalForEditProfile = document.querySelector('.modal_type_edit');
+const modalForAddCard = document.querySelector('.modal_type_add');
+const modalForPhoto = document.querySelector('.modal_type_photo');
+const buttonForEditProfile = document.querySelector('.profile__edit-button');
+const buttonForAddCard = document.querySelector('.profile__add-button');
+const closeEditModalButton = document.querySelector('.modal__close_edit');
+const closeAddModalButton = document.querySelector('.modal__close_add');
+const submitAddCardForm = document.querySelector('.form_add');
+const inputPlaceName = document.querySelector('.form__input_type_placename');
+const inputLink = document.querySelector('.form__input_type_link');
+const elementTemplate = document.querySelector('.element_template');
+const container = document.querySelector('.elements');
+const modalPhotoLink = modalForPhoto.querySelector('.modal__photo');
+const modalPhotoTitle = modalForPhoto.querySelector('.modal__title');
 
-//Навешиваем слушатели на все крестики для фото
-spanToClosePhotoModal.forEach(item => {
-    item.addEventListener('click', function () {
+//Универсальное закрытие всех попапов
+const closeButtons = document.querySelectorAll('.modal__close');
+closeButtons.forEach((button) => {
+    // находим 1 раз ближайший к крестику попап
+    const popup = button.closest('.modal');
+    // устанавливаем обработчик закрытия на крестик
+    button.addEventListener('click', () => closePopup(popup));
+});
 
-        modalForPhoto.classList.toggle('modal_show');
 
-    })
-})
+//Закрытие попапа
+function closePopup(popup) {
+    popup.classList.remove('modal_show');
+    return popup;
+}
+//Открытие попапа
+function showPopup(popup) {
+    popup.classList.add('modal_show');
+    return popup;
+}
+
 
 //Кнопка для открытия попапа добавления карточки
-buttonForAddCard.addEventListener('click', function () {
-    modalForAddCard.classList.toggle('modal_show');
-
-})
+buttonForAddCard.addEventListener('click', ()=>showPopup(modalForAddCard))
 
 //Кнопка для открытия попапа редактирования профиля
 buttonForEditProfile.addEventListener('click', function (){
 
-    modalForEditProfile.classList.toggle('modal_show');
+    showPopup(modalForEditProfile);
     inputName.value = name.textContent;
     inputAbout.value = about.textContent;
 
 })
-
-
-//Для закрытия попапа редактирования профиля
-spanToCloseEditModal.onclick = function() {
-    modalForEditProfile.classList.toggle('modal_show');
-
-}
-
-//Для закрытия попапа добавления карточки
-spanToCloseAddModal.onclick = function() {
-
-    modalForAddCard.classList.toggle('modal_show');
-}
-
-
 
 let name = document.querySelector('.profile__name');
 let about = document.querySelector('.profile__about');
@@ -52,7 +53,7 @@ let about = document.querySelector('.profile__about');
 let inputName = document.querySelector('.form__input_type_name');
 let inputAbout = document.querySelector('.form__input_type_about');
 
-let submitEditProfileForm = document.querySelector('.form_edit');
+const submitEditProfileForm = document.querySelector('.form_edit');
 
 //Сабмит формы редактирования профиля
 submitEditProfileForm.addEventListener('submit', function (event){
@@ -65,11 +66,9 @@ submitEditProfileForm.addEventListener('submit', function (event){
 })
 
 //Сабмит формы добавлния карточки
-let submitAddCardForm = document.querySelector('.form_add');
 
 submitAddCardForm.addEventListener('submit', function (event) {
-    let inputPlaceName = document.querySelector('.form__input_type_placename');
-    let inputLink = document.querySelector('.form__input_type_link');
+
     event.preventDefault();
     let item = {};
     item.name = inputPlaceName.value;
@@ -77,7 +76,6 @@ submitAddCardForm.addEventListener('submit', function (event) {
     renderElement(item);
     modalForAddCard.classList.toggle('modal_show');
     event.target.reset();
-
 
 })
 
@@ -109,8 +107,7 @@ const initialCards = [
     }
 ];
 
-const elementTemplate = document.querySelector('.element_template');
-const container = document.querySelector('.elements');
+
 
 //клонирование шаблона и заполнение данными
 const getElement = (name, link) => {
@@ -119,6 +116,8 @@ const getElement = (name, link) => {
     nameElement.textContent = name;
     const linkElement = cardElement.querySelector('.element__photo');
     linkElement.src = link;
+    linkElement.alt = name;
+    setEventListeners(cardElement);
 
     return cardElement;
 }
@@ -129,14 +128,12 @@ const setEventListeners = (el) => {
 
     const photo = el.querySelector('.element__photo');
     photo.addEventListener('click', function (event){
-        let placeName = el.querySelector('.element__title');
+        const placeName = el.querySelector('.element__title');
 
         modalForPhoto.classList.toggle('modal_show');
 
-        let modalPhotoLink = modalForPhoto.querySelector('.modal__photo');
-        let modalPhotoTitle = modalForPhoto.querySelector('.modal__title');
-
         modalPhotoLink.src = photo.src;
+        modalPhotoLink.alt = photo.alt;
         modalPhotoTitle.textContent = placeName.textContent;
 
     });
@@ -158,7 +155,6 @@ const setEventListeners = (el) => {
 //получение элемента и добавление в контейнер
 const renderElement = (item) => {
     const el = getElement(item.name, item.link);
-    setEventListeners(el);
     container.prepend(el);
 
 
@@ -166,9 +162,3 @@ const renderElement = (item) => {
 
 //отрисовка всех элементов из массива
 initialCards.forEach(renderElement);
-
-
-
-
-
-
