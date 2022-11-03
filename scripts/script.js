@@ -26,12 +26,11 @@ closeButtons.forEach((button) => {
 //Закрытие попапа
 function closePopup(popup) {
     popup.classList.remove('modal_show');
-    return popup;
+
 }
 //Открытие попапа
 function showPopup(popup) {
     popup.classList.add('modal_show');
-    return popup;
 }
 
 
@@ -47,11 +46,11 @@ buttonForEditProfile.addEventListener('click', function (){
 
 })
 
-let name = document.querySelector('.profile__name');
-let about = document.querySelector('.profile__about');
+const name = document.querySelector('.profile__name');
+const about = document.querySelector('.profile__about');
 
-let inputName = document.querySelector('.form__input_type_name');
-let inputAbout = document.querySelector('.form__input_type_about');
+const inputName = document.querySelector('.form__input_type_name');
+const inputAbout = document.querySelector('.form__input_type_about');
 
 const submitEditProfileForm = document.querySelector('.form_edit');
 
@@ -61,7 +60,7 @@ submitEditProfileForm.addEventListener('submit', function (event){
     name.textContent = inputName.value;
     about.textContent = inputAbout.value;
     event.preventDefault();
-    modalForEditProfile.classList.toggle('modal_show');
+    closePopup(modalForEditProfile);
 
 })
 
@@ -70,11 +69,11 @@ submitEditProfileForm.addEventListener('submit', function (event){
 submitAddCardForm.addEventListener('submit', function (event) {
 
     event.preventDefault();
-    let item = {};
+    const item = {};
     item.name = inputPlaceName.value;
     item.link = inputLink.value;
     renderElement(item);
-    modalForAddCard.classList.toggle('modal_show');
+    closePopup(modalForAddCard);
     event.target.reset();
 
 })
@@ -129,9 +128,7 @@ const setEventListeners = (el) => {
     const photo = el.querySelector('.element__photo');
     photo.addEventListener('click', function (event){
         const placeName = el.querySelector('.element__title');
-
-        modalForPhoto.classList.toggle('modal_show');
-
+        showPopup(modalForPhoto);
         modalPhotoLink.src = photo.src;
         modalPhotoLink.alt = photo.alt;
         modalPhotoTitle.textContent = placeName.textContent;
