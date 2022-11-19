@@ -2,8 +2,3 @@
     opacity: 1;
 }
 
-@media (max-width: 880px) {
-    .form__input-error:last-of-type {
-        margin-bottom: 15px;
-    }
-}

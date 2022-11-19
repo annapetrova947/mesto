@@ -11,10 +11,21 @@
     font-style: normal;
     font-weight: 400;
     min-height: 30px;
+    width: 358px;
 }
 
 
 
 .form__input-error:last-of-type {
     margin-bottom: 32px;
+}
+
+@media (max-width: 880px) {
+    .form__input-error {
+        width: 238px;
+    }
+    .form__input-error:last-of-type {
+        margin-bottom: 15px;
+
+    }
 }
