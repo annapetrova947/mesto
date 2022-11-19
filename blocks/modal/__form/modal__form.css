@@ -5,12 +5,13 @@
     border-radius: 10px;
     max-width: 430px;
     position: relative;
-    min-width: 430px;
+
 }
 
 @media (max-width: 880px) {
     .modal__form {
-        min-width: 282px;
+
+        max-width: 282px;
     }
 }
 

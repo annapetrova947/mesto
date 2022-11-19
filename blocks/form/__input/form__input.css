@@ -8,11 +8,10 @@
     line-height: 17px;
     color: black;
     height: 27px;
+    min-width: 238px;
 }
 
-.red {
-    border-bottom: 1px solid red;
-}
+
 
 
 

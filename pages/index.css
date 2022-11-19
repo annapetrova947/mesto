@@ -22,41 +22,17 @@
 @import url(../blocks/modal/__close/modal__close.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__input/_error-active/form__input_error-active.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/_active/form__input-error_active.css);
 @import url(../blocks/form/__submit-button/form__submit-button.css);
+@import url(../blocks/form/__submit-button/_disabled/form__submit-button_disabled.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/modal/_show/modal_show.css);
 @import url(../blocks/modal/__photo/modal__photo.css);
 @import url(../blocks/modal/__title/modal__title.css);
 @import url(../blocks/modal/__conteiner/modal__conteiner.css);
 
-.form__input-error {
-    font-size: 12px;
-    line-height: 15px;
-    color: #e53e3e;
-    opacity: 0;
-    top: calc(100% + 5px);
-    left: 0;
-    transition: opacity 0.3s;
-
-    font-family: 'Inter', 'Arial', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    min-height: 25px;
-}
 
 
 
-.form__input-error:last-of-type {
-    margin-bottom: 32px;
-}
-
-
-.form__input-error_active {
-    opacity: 1;
-}
-
-@media (max-width: 880px) {
-    .form__input-error:last-of-type {
-        margin-bottom: 28px;
-    }
-}

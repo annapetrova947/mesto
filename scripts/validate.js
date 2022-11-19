@@ -1,58 +1,53 @@
-
-
-
-
-
-const checkInputValidity = (inputElement) => {
+const checkInputValidity = (inputElement, selectors) => {
     const isValid = inputElement.validity.valid;
 
     const errorElement = document.querySelector(`#${inputElement.id}-error`);
     if(isValid) {
-        hideInputError(errorElement, inputElement);
+        hideInputError(errorElement, inputElement, selectors);
     }
     else {
-        showInputError(errorElement, inputElement);
+        showInputError(errorElement, inputElement, selectors);
     }
 }
 
-const showInputError = (errorElement, inputElement) => {
+const showInputError = (errorElement, inputElement, selectors) => {
     errorElement.textContent = inputElement.validationMessage;
-    inputElement.classList.add('red');
-    errorElement.classList.add('form__input-error_active');
+    inputElement.classList.add(selectors.inputErrorClass);
+    errorElement.classList.add(selectors.errorClass);
 }
 
-const hideInputError = (errorElement, inputElement) => {
+const hideInputError = (errorElement, inputElement, selectors) => {
     errorElement.textContent = '';
-    errorElement.classList.remove('form__input-error_active');
-    inputElement.classList.remove('red')
+    errorElement.classList.remove(selectors.errorClass);
+    inputElement.classList.remove(selectors.inputErrorClass)
 }
 
-const EventListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll('.form__input'));
-    const submitButton = formElement.querySelector('.form__submit-button');
+const EventListeners = (formElement, selectors) => {
+    const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
+    const submitButton = formElement.querySelector(selectors.submitButtonSelector);
 
-    //toggleButton(inputList, submitButton);
+
 
     inputList.forEach(inputElement => {
         inputElement.addEventListener('input', ()=> {
-            checkInputValidity(inputElement);
-            toggleButton(inputList, submitButton);
+            checkInputValidity(inputElement, selectors);
+            toggleButton(inputList, submitButton, selectors);
         })
     })
 }
 
 
-const toggleButton = (inputList, buttonElement) => {
+const toggleButton = (inputList, buttonElement, selectors) => {
     const hasInvalidInput = inputList.some(inputElement => !inputElement.validity.valid);
 
     if (hasInvalidInput) {
         buttonElement.setAttribute("disabled", true);
-        buttonElement.classList.add('form__submit-button_disabled');
+        buttonElement.classList.add(selectors.inactiveButtonClass);
     }
 
     else {
         buttonElement.removeAttribute('disabled');
-        buttonElement.classList.remove('form__submit-button_disabled');
+        buttonElement.classList.remove(selectors.inactiveButtonClass);
     }
 }
 
@@ -60,7 +55,7 @@ function enableValidation(selectors) {
     const formList = document.querySelectorAll(selectors.formSelector);
 
     formList.forEach(formElement => {
-        EventListeners(formElement);
+        EventListeners(formElement, selectors);
     })
 }
 
@@ -68,9 +63,9 @@ const selectors = {
     formSelector: '.modal',
     inputSelector: '.form__input',
     submitButtonSelector: '.form__submit-button',
-    inactiveButtonClass: '.form__submit-button_disabled',
-    inputErrorClass: '.red',
-    errorClass: '.form__input-error_active'
+    inactiveButtonClass: 'form__submit-button_disabled',
+    inputErrorClass: 'form__input_error-active',
+    errorClass: 'form__input-error_active'
 
 }
 
