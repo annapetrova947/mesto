@@ -29,6 +29,7 @@
 @import url(../blocks/form/__submit-button/_disabled/form__submit-button_disabled.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/modal/_show/modal_show.css);
+@import url(../blocks/modal/_show-img/modal_show-img.css);
 @import url(../blocks/modal/__photo/modal__photo.css);
 @import url(../blocks/modal/__title/modal__title.css);
 @import url(../blocks/modal/__conteiner/modal__conteiner.css);

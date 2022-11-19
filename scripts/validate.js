@@ -22,7 +22,7 @@ const hideInputError = (errorElement, inputElement, selectors) => {
     inputElement.classList.remove(selectors.inputErrorClass)
 }
 
-const EventListeners = (formElement, selectors) => {
+const setEventListenersToInputs = (formElement, selectors) => {
     const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
     const submitButton = formElement.querySelector(selectors.submitButtonSelector);
 
@@ -55,7 +55,7 @@ function enableValidation(selectors) {
     const formList = document.querySelectorAll(selectors.formSelector);
 
     formList.forEach(formElement => {
-        EventListeners(formElement, selectors);
+        setEventListenersToInputs(formElement, selectors);
     })
 }
 

@@ -3,7 +3,7 @@ const modalForAddCard = document.querySelector('.modal_type_add');
 const modalForPhoto = document.querySelector('.modal_type_photo');
 const buttonForEditProfile = document.querySelector('.profile__edit-button');
 const buttonForAddCard = document.querySelector('.profile__add-button');
-const submitAddCardForm = document.querySelector('.form_add');
+const formToAddCard = document.querySelector('.form_add');
 const inputPlaceName = document.querySelector('.form__input_type_placename');
 const inputLink = document.querySelector('.form__input_type_link');
 const elementTemplate = document.querySelector('.element_template');
@@ -12,8 +12,8 @@ const modalPhotoLink = modalForPhoto.querySelector('.modal__photo');
 const modalPhotoTitle = modalForPhoto.querySelector('.modal__title');
 
 //Универсальное закрытие всех попапов
-const closeButtons = document.querySelectorAll('.modal__close');
-closeButtons.forEach((button) => {
+const buttonsToClosePopups = document.querySelectorAll('.modal__close');
+buttonsToClosePopups.forEach((button) => {
     // находим 1 раз ближайший к крестику попап
     const popup = button.closest('.modal');
     // устанавливаем обработчик закрытия на крестик
@@ -25,7 +25,7 @@ closeButtons.forEach((button) => {
 function closePopup(popup) {
     popup.classList.remove('modal_show');
     //слушатель esc
-    document.removeEventListener('keydown', keyHandler);
+    document.removeEventListener('keydown', closePopupByEsc);
 
 }
 
@@ -37,17 +37,16 @@ backgroundModals.forEach((modal)=>{
 function clickOverlay (evt) {
 
     if(evt.target.classList.contains('modal')){
-        const modal = document.querySelector('.modal_show');
-        closePopup(modal);
+        closePopup(evt.target);
+
     }
 }
 
 //функция закрытия попапа при нажатии esc
-function keyHandler(evt) {
+function closePopupByEsc(evt) {
     if(evt.key === 'Escape'){
         const popup = document.querySelector('.modal_show');
         closePopup(popup);
-
     }
 }
 
@@ -55,7 +54,7 @@ function keyHandler(evt) {
 function showPopup(popup) {
     popup.classList.add('modal_show');
     //слушатель esc
-    document.addEventListener('keydown', keyHandler);
+    document.addEventListener('keydown', closePopupByEsc);
 }
 
 
@@ -77,10 +76,10 @@ const about = document.querySelector('.profile__about');
 const inputName = document.querySelector('.form__input_type_name');
 const inputAbout = document.querySelector('.form__input_type_about');
 
-const submitEditProfileForm = document.querySelector('.form_edit');
+const formToEditProfile = document.querySelector('.form_edit');
 
 //Сабмит формы редактирования профиля
-submitEditProfileForm.addEventListener('submit', function (event){
+formToEditProfile.addEventListener('submit', function (event){
 
     name.textContent = inputName.value;
     about.textContent = inputAbout.value;
@@ -91,7 +90,7 @@ submitEditProfileForm.addEventListener('submit', function (event){
 
 //Сабмит формы добавлния карточки
 
-submitAddCardForm.addEventListener('submit', function (event) {
+formToAddCard.addEventListener('submit', function (event) {
 
     event.preventDefault();
     const item = {};
@@ -100,6 +99,9 @@ submitAddCardForm.addEventListener('submit', function (event) {
     renderElement(item);
     closePopup(modalForAddCard);
     event.target.reset();
+    const buttonToSubmit = formToAddCard.querySelector('.form__submit-button')
+    buttonToSubmit.setAttribute("disabled", true);
+    buttonToSubmit.classList.add('form__submit-button_disabled');
 
 })
 
@@ -135,7 +137,7 @@ const initialCards = [
 
 //клонирование шаблона и заполнение данными
 const getElement = (name, link) => {
-    const cardElement = elementTemplate.content.cloneNode(true).children[0];
+    const cardElement = elementTemplate.content.cloneNode(true);
     const nameElement = cardElement.querySelector('.element__title');
     nameElement.textContent = name;
     const linkElement = cardElement.querySelector('.element__photo');
@@ -152,11 +154,11 @@ const setEventListeners = (el) => {
 
     const photo = el.querySelector('.element__photo');
     photo.addEventListener('click', function (event){
-        const placeName = el.querySelector('.element__title');
         showPopup(modalForPhoto);
+        modalForPhoto.classList.add('modal_show-img');
         modalPhotoLink.src = photo.src;
         modalPhotoLink.alt = photo.alt;
-        modalPhotoTitle.textContent = placeName.textContent;
+        modalPhotoTitle.textContent = photo.alt;
 
     });
 
@@ -165,8 +167,8 @@ const setEventListeners = (el) => {
         like.classList.toggle('element__like_active');
     });
 
-    const deleteItem = el.querySelector('.element__delete');
-    deleteItem.addEventListener('click', function (event){
+    const itemToDelete = el.querySelector('.element__delete');
+    itemToDelete.addEventListener('click', function (event){
         const target = event.target;
         const currentItem = target.closest('.element');
         currentItem.remove();
