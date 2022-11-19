@@ -20,3 +20,11 @@
         line-height: 17px;
     }
 }
+
+.form__submit-button_disabled {
+    color: black;
+    background-color: white;
+    border: 1px solid #000000;
+    border-radius: 2px;
+    opacity: 0.2;
+}

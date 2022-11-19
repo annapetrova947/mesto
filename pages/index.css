@@ -28,3 +28,35 @@
 @import url(../blocks/modal/__photo/modal__photo.css);
 @import url(../blocks/modal/__title/modal__title.css);
 @import url(../blocks/modal/__conteiner/modal__conteiner.css);
+
+.form__input-error {
+    font-size: 12px;
+    line-height: 15px;
+    color: #e53e3e;
+    opacity: 0;
+    top: calc(100% + 5px);
+    left: 0;
+    transition: opacity 0.3s;
+
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    min-height: 25px;
+}
+
+
+
+.form__input-error:last-of-type {
+    margin-bottom: 32px;
+}
+
+
+.form__input-error_active {
+    opacity: 1;
+}
+
+@media (max-width: 880px) {
+    .form__input-error:last-of-type {
+        margin-bottom: 28px;
+    }
+}

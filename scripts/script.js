@@ -3,8 +3,6 @@ const modalForAddCard = document.querySelector('.modal_type_add');
 const modalForPhoto = document.querySelector('.modal_type_photo');
 const buttonForEditProfile = document.querySelector('.profile__edit-button');
 const buttonForAddCard = document.querySelector('.profile__add-button');
-const closeEditModalButton = document.querySelector('.modal__close_edit');
-const closeAddModalButton = document.querySelector('.modal__close_add');
 const submitAddCardForm = document.querySelector('.form_add');
 const inputPlaceName = document.querySelector('.form__input_type_placename');
 const inputLink = document.querySelector('.form__input_type_link');
@@ -26,11 +24,38 @@ closeButtons.forEach((button) => {
 //Закрытие попапа
 function closePopup(popup) {
     popup.classList.remove('modal_show');
+    //слушатель esc
+    document.removeEventListener('keydown', keyHandler);
 
 }
+
+const backgroundModals = document.querySelectorAll('.modal');
+backgroundModals.forEach((modal)=>{
+    modal.addEventListener('click', clickOverlay)
+})
+
+function clickOverlay (evt) {
+
+    if(evt.target.classList.contains('modal')){
+        const modal = document.querySelector('.modal_show');
+        closePopup(modal);
+    }
+}
+
+//функция закрытия попапа при нажатии esc
+function keyHandler(evt) {
+    if(evt.key === 'Escape'){
+        const popup = document.querySelector('.modal_show');
+        closePopup(popup);
+
+    }
+}
+
 //Открытие попапа
 function showPopup(popup) {
     popup.classList.add('modal_show');
+    //слушатель esc
+    document.addEventListener('keydown', keyHandler);
 }
 
 
@@ -159,3 +184,5 @@ const renderElement = (item) => {
 
 //отрисовка всех элементов из массива
 initialCards.forEach(renderElement);
+
+

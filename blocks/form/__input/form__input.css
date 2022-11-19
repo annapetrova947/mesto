@@ -1,7 +1,7 @@
 .form__input {
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -9,12 +9,10 @@
     color: black;
     height: 27px;
 }
-.form__input:last-of-type {
-    margin-bottom: 48px;
+
+.red {
+    border-bottom: 1px solid red;
 }
 
-@media (max-width: 880px) {
-    .form__input:last-of-type {
-        margin-bottom: 45px;
-    }
-}
+
+
