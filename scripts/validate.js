@@ -36,13 +36,19 @@ const setEventListenersToInputs = (formElement, selectors) => {
     })
 }
 
+function makeButtonDisabled(button, classAdd) {
+
+    button.setAttribute("disabled", true);
+    button.classList.add(classAdd);
+}
+
 
 const toggleButton = (inputList, buttonElement, selectors) => {
     const hasInvalidInput = inputList.some(inputElement => !inputElement.validity.valid);
 
     if (hasInvalidInput) {
-        buttonElement.setAttribute("disabled", true);
-        buttonElement.classList.add(selectors.inactiveButtonClass);
+        makeButtonDisabled(buttonElement, selectors.inactiveButtonClass);
+
     }
 
     else {

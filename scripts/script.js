@@ -100,8 +100,8 @@ formToAddCard.addEventListener('submit', function (event) {
     closePopup(modalForAddCard);
     event.target.reset();
     const buttonToSubmit = formToAddCard.querySelector('.form__submit-button')
-    buttonToSubmit.setAttribute("disabled", true);
-    buttonToSubmit.classList.add('form__submit-button_disabled');
+    makeButtonDisabled(buttonToSubmit, 'form__submit-button_disabled');
+
 
 })
 
@@ -162,9 +162,9 @@ const setEventListeners = (el) => {
 
     });
 
-    const like = el.querySelector('.element__like');
-    like.addEventListener('click', function (event){
-        like.classList.toggle('element__like_active');
+    const elementLike = el.querySelector('.element__like');
+    elementLike.addEventListener('click', function (event){
+        elementLike.classList.toggle('element__like_active');
     });
 
     const itemToDelete = el.querySelector('.element__delete');
