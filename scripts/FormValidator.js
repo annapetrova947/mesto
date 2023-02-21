@@ -2,11 +2,11 @@ export default class FormValidator {
     constructor(config, form) {
         this._config = config;
         this._form = form;
+        this.submitButton = form.querySelector(this._config.submitButtonSelector)
     }
 
     _checkInputValidity(inputElement) {
         const isValid = inputElement.validity.valid;
-
         const errorElement = document.querySelector(`#${inputElement.id}-error`);
         if (isValid) {
             this._hideInputError(inputElement, errorElement);
@@ -27,28 +27,23 @@ export default class FormValidator {
         inputElement.classList.remove(this._config.inputErrorClass);
     }
 
-    enableSubmitButton(submitButton) {
-
-        submitButton.setAttribute("disabled", true);
-        submitButton.classList.add(this._config.inactiveButtonClass);
+    enableSubmitButton() {
+        this.submitButton.setAttribute("disabled", true);
+        this.submitButton.classList.add(this._config.inactiveButtonClass);
     }
 
     _toggleButtonState(inputList) {
         const hasInvalidInput = inputList.some(inputElement => !inputElement.validity.valid);
-        const submitButton = this._form.querySelector(this._config.submitButtonSelector)
 
         if (hasInvalidInput) {
-            this.enableSubmitButton(submitButton, this._config.inactiveButtonClass);
-
+            this.enableSubmitButton(this._config.inactiveButtonClass);
         } else {
-
-            submitButton.removeAttribute('disabled');
-            submitButton.classList.remove(this._config.inactiveButtonClass);
+            this.submitButton.removeAttribute('disabled');
+            this.submitButton.classList.remove(this._config.inactiveButtonClass);
         }
     }
 
     _setEventListenersToInputs() {
-
         const inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
         inputList.forEach(inputElement => {
             inputElement.addEventListener('input', () => {
@@ -61,7 +56,6 @@ export default class FormValidator {
     enableValidation() {
 
         const formList = document.querySelectorAll(this._config.formSelector);
-
         formList.forEach(formElement => {
             this._setEventListenersToInputs();
         })
