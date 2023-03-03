@@ -1,17 +1,19 @@
-import {showImagePopup} from "./utils.js";
 
 class Card {
 
-    constructor(data, tamplate_selector) {
+    constructor(data, tamplate_selector, handleCardClick) {
         this._card_name = data.name;
         this._card_url = data.link;
         this._tamplate_selector = tamplate_selector;
         this._element = this._getElementFromTemplate()
         this._elementPhoto = this._element.querySelector('.element__photo');
+        this._handleCardClick = handleCardClick;
 
         this._deleteCard = this._deleteCard.bind(this);
         this._likeCard = this._likeCard.bind(this);
+        //this._handleCardClick = this._handleCardClick.bind(this);
     }
+
 
     _getElementFromTemplate() {
         return document.querySelector(this._tamplate_selector)
@@ -23,7 +25,10 @@ class Card {
     _addEventListeners() {
         this._element.querySelector('.element__delete').addEventListener('click', this._deleteCard);
         this._element.querySelector('.element__like').addEventListener('click', this._likeCard);
-        this._elementPhoto.addEventListener('click', () => showImagePopup(document.querySelector('.modal_type_photo'), this._element))
+
+        this._elementPhoto.addEventListener('click', () => {
+
+            this._handleCardClick()})
     }
 
     _deleteCard() {
