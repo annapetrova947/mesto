@@ -1,10 +1,10 @@
 
 class Card {
 
-    constructor(data, tamplate_selector, handleCardClick) {
-        this._card_name = data.name;
-        this._card_url = data.link;
-        this._tamplate_selector = tamplate_selector;
+    constructor(data, tamplateSelector, handleCardClick) {
+        this._cardName = data.name;
+        this._cardUrl = data.link;
+        this._tamplateSelector = tamplateSelector;
         this._element = this._getElementFromTemplate()
         this._elementPhoto = this._element.querySelector('.element__photo');
         this._handleCardClick = handleCardClick;
@@ -16,7 +16,7 @@ class Card {
 
 
     _getElementFromTemplate() {
-        return document.querySelector(this._tamplate_selector)
+        return document.querySelector(this._tamplateSelector)
             .content
             .querySelector('.element')
             .cloneNode(true);
@@ -41,9 +41,9 @@ class Card {
 
     getElement() {
 
-        this._element.querySelector('.element__title').textContent = this._card_name;
-        this._elementPhoto.src = this._card_url;
-        this._elementPhoto.alt = this._card_name;
+        this._element.querySelector('.element__title').textContent = this._cardName;
+        this._elementPhoto.src = this._cardUrl;
+        this._elementPhoto.alt = this._cardName;
         this._addEventListeners();
         return this._element;
     }

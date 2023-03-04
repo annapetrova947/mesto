@@ -1,7 +1,5 @@
 const buttonForEditProfile = document.querySelector('.profile__edit-button');
 const buttonForAddCard = document.querySelector('.profile__add-button');
-const name = document.querySelector('.profile__name');
-const about = document.querySelector('.profile__about');
 const inputName = document.querySelector('.form__input_type_name');
 const inputAbout = document.querySelector('.form__input_type_about');
 const initialCards = [
@@ -42,11 +40,10 @@ const selectors = {
 
 const modalToAddCard = document.querySelector('.modal_type_add')
 const modalToEditProfile = document.querySelector('.modal_type_edit')
+
 export {
     buttonForEditProfile,
     buttonForAddCard,
-    name,
-    about,
     inputName,
     inputAbout,
     initialCards,

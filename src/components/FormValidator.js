@@ -2,7 +2,8 @@ export default class FormValidator {
     constructor(config, form) {
         this._config = config;
         this._form = form;
-        this.submitButton = form.querySelector(this._config.submitButtonSelector)
+        this._submitButton = form.querySelector(this._config.submitButtonSelector)
+        this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
     }
 
     _checkInputValidity(inputElement) {
@@ -28,48 +29,32 @@ export default class FormValidator {
     }
 
     enableSubmitButton() {
-        this.submitButton.setAttribute("disabled", true);
-        this.submitButton.classList.add(this._config.inactiveButtonClass);
+        this._submitButton.setAttribute("disabled", true);
+        this._submitButton.classList.add(this._config.inactiveButtonClass);
     }
 
     _toggleButtonState(inputList) {
         const hasInvalidInput = inputList.some(inputElement => !inputElement.validity.valid);
 
         if (hasInvalidInput) {
-            this.enableSubmitButton(this._config.inactiveButtonClass);
+            this.enableSubmitButton();
         } else {
-            this.submitButton.removeAttribute('disabled');
-            this.submitButton.classList.remove(this._config.inactiveButtonClass);
+            this._submitButton.removeAttribute('disabled');
+            this._submitButton.classList.remove(this._config.inactiveButtonClass);
         }
     }
 
     _setEventListenersToInputs() {
-        const inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
-        inputList.forEach(inputElement => {
+
+        this._inputList.forEach(inputElement => {
             inputElement.addEventListener('input', () => {
                 this._checkInputValidity(inputElement);
-                this._toggleButtonState(inputList);
+                this._toggleButtonState(this._inputList);
             })
         })
     }
 
     enableValidation() {
-
-        const formList = document.querySelectorAll(this._config.formSelector);
-        formList.forEach(formElement => {
-            this._setEventListenersToInputs();
-        })
+        this._setEventListenersToInputs();
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-

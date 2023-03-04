@@ -2,7 +2,7 @@
   "name": "mesto",
   "version": "1.0.0",
   "description": "Проект об исследователях Выполнен на HTML, CSS и JS",
-  "main": "index.js",
+  "main": "pages/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve"
@@ -13,7 +13,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "ISCF",
   "bugs": {
     "url": "https://github.com/annapetrova947/mesto/issues"
   },
