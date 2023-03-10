@@ -31,7 +31,7 @@ const popupToEditProfile = new PopupWithForm({popupSelector: '.modal_type_edit',
 
 
 buttonForAddCard.addEventListener('click', ()=>{
-    validatorFormToAddCard.enableSubmitButton()
+    validatorFormToAddCard.disableSubmitButton()
     popupToAddCard.open()
 })
 buttonForEditProfile.addEventListener('click', ()=>{

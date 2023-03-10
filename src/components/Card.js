@@ -11,7 +11,6 @@ class Card {
 
         this._deleteCard = this._deleteCard.bind(this);
         this._likeCard = this._likeCard.bind(this);
-        //this._handleCardClick = this._handleCardClick.bind(this);
     }
 
 
@@ -28,7 +27,7 @@ class Card {
 
         this._elementPhoto.addEventListener('click', () => {
 
-            this._handleCardClick()})
+            this._handleCardClick(this._cardName, this._cardUrl)})
     }
 
     _deleteCard() {
