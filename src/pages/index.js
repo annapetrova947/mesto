@@ -50,7 +50,7 @@ const popupToEditProfile = new PopupWithForm({popupSelector: '.modal_type_edit',
 
     }});
 
-const popupToEditAvatar = new PopupWithForm({popupSelector: '.modal_type_edit_avatar', formSubmit:(inputsData)=>
+const popupToEditAvatar = new PopupWithForm({popupSelector: '.modal_type_edit-avatar', formSubmit:(inputsData)=>
     {
         changeButtonText(modalToEditAvatar, 'Сохранение...')
         api.saveAvatar(inputsData)
