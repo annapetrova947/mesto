@@ -25,6 +25,7 @@ class Card {
 
     isLiked(){
         let flag = false
+        //console.log(this._likes)
         this._likes.forEach((like)=> {
             if (like._id === this._currentUserId) {flag = true}
         })
@@ -56,7 +57,6 @@ class Card {
     }
 
     _likeCard() {
-
         if (this.isLiked()) {
             this._deleteLike()
         }
@@ -69,15 +69,16 @@ class Card {
     }
     _deleteLike (){
         api.deleteLike(this._id).then(r => {
-
+            this._likes = r.likes
             this._elementLike.textContent = r.likes.length;
             this._likeClassList.remove('element__like_active');
+
         });
     }
 
     _putLike(){
         api.likeCard(this._id).then(r => {
-
+            this._likes = r.likes
             this._elementLike.textContent = r.likes.length;
             this._likeClassList.add('element__like_active');
         });

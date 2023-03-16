@@ -8,7 +8,6 @@ import {
     buttonForAddCard,
     inputName,
     inputAbout,
-    modalDelete,
     selectors,
     modalToAddCard,
     modalToEditProfile,
@@ -26,7 +25,6 @@ function changeButtonText(popup, text){
 
 const popupToAddCard = new PopupWithForm({popupSelector: '.modal_type_add', formSubmit:(inputsData)=>
     {
-        //console.log(inputsData);
         changeButtonText(modalToAddCard, 'Создание...')
         api.createCard(inputsData)
             .then((item)=> {
@@ -38,7 +36,6 @@ const popupToAddCard = new PopupWithForm({popupSelector: '.modal_type_add', form
             .catch((err)=>{console.log(err)})
         }}
 )
-
 
 const popupToEditProfile = new PopupWithForm({popupSelector: '.modal_type_edit', formSubmit:(inputsData)=>
     {
@@ -95,7 +92,6 @@ popupToEditAvatar.setEventListeners()
 
 const userInfo = new UserInfo('.profile__name', '.profile__about', '.profile__avatar')
 const cardList = new Section({
-    //items: initialCards,
     renderer: (item) => {
 
         const cardElement = createCard(item, '.element_template');
@@ -104,10 +100,6 @@ const cardList = new Section({
 }, '.elements')
 
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-61/', '8f841aa5-d524-4117-84e2-1be232c9909b');
-// api.getCards().then((items)=>{
-//     console.log(items)
-//     cardList.renderItems(items)
-// })
 
 const popupToDelete = new PopupDelete({popupSelector: '.modal_type_delete', formSubmit:()=>
     {

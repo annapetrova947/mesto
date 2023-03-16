@@ -20,7 +20,6 @@ export default class Api {
         const promise = fetch(`${this._basePath}cards`, {
             headers: this._getHeaders()
         });
-
         return promise.then(this._getJSON)
     }
 
@@ -29,7 +28,6 @@ export default class Api {
                 method: "POST",
                 headers: this._getHeaders(),
                 body: JSON.stringify(item),
-
         })
             .then(this._getJSON);
     }
@@ -60,31 +58,22 @@ export default class Api {
         return fetch(`${this._basePath}cards/${id}`, {
             method: "DELETE",
             headers: this._getHeaders(),
-
-
         })
             .then(this._getJSON);
-
     }
 
     likeCard(id){
         return fetch(`${this._basePath}cards/${id}/likes`, {
             method: "PUT",
             headers: this._getHeaders(),
-
-
         })
             .then(this._getJSON);
     }
-
-
 
     deleteLike(id){
         return fetch(`${this._basePath}cards/${id}/likes`, {
             method: "DELETE",
             headers: this._getHeaders(),
-
-
         })
             .then(this._getJSON);
     }
@@ -93,11 +82,8 @@ export default class Api {
         return fetch(`${this._basePath}users/me/avatar`, {
             method: "PATCH",
             headers: this._getHeaders(),
-
             body: JSON.stringify(data),
         })
             .then(this._getJSON);
     }
-
-
 }

@@ -4,7 +4,6 @@ import {userId} from "../pages/index.js";
 import {selectors} from "./constants.js";
 
 function createCard(item, selector) {
-    //console.log(userId)
     const card = new Card(item, selector, selectors,  userId, (cardName, cardUrl)=>{
         cardPopup.open(cardName, cardUrl);
     })
