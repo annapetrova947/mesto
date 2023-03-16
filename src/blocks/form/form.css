@@ -9,3 +9,13 @@
         padding: 25px 22px;
     }
 }
+
+
+
+.form__question {
+    font-size: 24px;
+    line-height: 29px;
+    margin: 0 0 38px;
+    min-width: 430px;
+}
+

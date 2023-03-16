@@ -1,3 +1,18 @@
+.element__likes {
+    display: grid;
+    flex-direction: column;
+    margin-right: 30px;
+    margin-top: 22px;
+}
+
+.element__like-amount {
+    margin-top: 3px;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: black;
+}
+
 .element__like {
     background-image: url("../../../images/Like.svg");
     width: 22px;
@@ -5,7 +20,7 @@
     background-color: white;
     border: 0;
     align-self: center;
-    margin-right: 30px;
+
 
 }
 

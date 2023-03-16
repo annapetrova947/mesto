@@ -10,14 +10,14 @@
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
-    min-height: 30px;
+    min-height: 24px;
     width: 358px;
 }
 
 
 
 .form__input-error:last-of-type {
-    margin-bottom: 32px;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 880px) {
