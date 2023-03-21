@@ -2,7 +2,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import {createCard} from "../utils/utils.js";
+
 import {
     buttonForEditProfile,
     buttonForAddCard,
@@ -12,16 +12,50 @@ import {
     modalToAddCard,
     modalToEditProfile,
     modalToEditAvatar,
+    modalToDeleteCard,
     buttonForEditAvatar
 } from '../utils/constants.js';
 import './index.css';
 import Api from "../components/Api.js";
 import PopupDelete from "../components/PopupDelete";
+import PopupWithImage from "../components/PopupWithImage.js"
+import Card from "../components/Card.js";
 
 function changeButtonText(popup, text){
     const submitButton = popup.querySelector('.form__submit-button')
     submitButton.textContent = text
 }
+
+const confirmDeleteCard = (card) => {
+    popupToDelete.open(card)
+
+}
+
+const handleLikeClick = (card)=>{
+    if (card.isLiked()) {
+        api.deleteLike(card.id).then(r => {
+            card.toggleLike(r)
+        })
+            .catch((err)=>{console.log(err)});
+    }
+    else {
+        api.likeCard(card.id)
+            .then(r => {
+            card.toggleLike(r)
+        })
+            .catch((err)=>{console.log(err)})
+    }
+}
+
+function createCard(item, selector) {
+    const card = new Card(item, selector, selectors,  userId, popupToDelete, (cardName, cardUrl)=>{
+        cardPopup.open(cardName, cardUrl);
+    }, confirmDeleteCard, handleLikeClick)
+    return card.getElement();
+}
+const cardPopup = new PopupWithImage('.modal_type_photo');
+cardPopup.setEventListeners()
+
 
 const popupToAddCard = new PopupWithForm({popupSelector: '.modal_type_add', formSubmit:(inputsData)=>
     {
@@ -31,9 +65,12 @@ const popupToAddCard = new PopupWithForm({popupSelector: '.modal_type_add', form
             const cardElement = createCard(item, '.element_template');
             cardList.setItem(cardElement)
             popupToAddCard.close();
-            changeButtonText(modalToAddCard, 'Сохранить')
+
         })
             .catch((err)=>{console.log(err)})
+            .finally(()=>{
+                changeButtonText(modalToAddCard, 'Сохранить')
+            })
         }}
 )
 
@@ -44,9 +81,12 @@ const popupToEditProfile = new PopupWithForm({popupSelector: '.modal_type_edit',
             .then((data)=>{
                 userInfo.setUserInfo(data);
                 popupToEditProfile.close();
-                changeButtonText(modalToEditProfile, 'Сохранить')
+
             })
             .catch((err)=>{console.log(err)})
+            .finally(()=>{
+                changeButtonText(modalToEditProfile, 'Сохранить')
+            })
 
     }});
 
@@ -55,16 +95,14 @@ const popupToEditAvatar = new PopupWithForm({popupSelector: '.modal_type_edit-av
         changeButtonText(modalToEditAvatar, 'Сохранение...')
         api.saveAvatar(inputsData)
             .then((data)=>{
-                api.getProfileInformation().then(
-                    (res)=>{
-                        userInfo.setUserInfo(res)
-                    }
-                )
-                    .catch((err)=>{console.log(err)})
+                userInfo.setUserInfo(data)
                 popupToEditAvatar.close();
-                changeButtonText(modalToEditProfile, 'Сохранить')
+
             })
             .catch((err)=>{console.log(err)})
+            .finally(()=>{
+                changeButtonText(modalToEditAvatar, 'Сохранить')
+            })
 
     }});
 
@@ -101,34 +139,37 @@ const cardList = new Section({
 
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-61/', '8f841aa5-d524-4117-84e2-1be232c9909b');
 
-const popupToDelete = new PopupDelete({popupSelector: '.modal_type_delete', formSubmit:()=>
+const popupToDelete = new PopupDelete({popupSelector: '.modal_type_delete', formSubmit:(card)=>
     {
+        changeButtonText(modalToDeleteCard, 'Удаление...')
         api.deleteCard(popupToDelete.getCardId())
-            .then(()=>{
-                popupToDelete.getElement().remove();
+            .then((data)=>{
+                card._deleteCard();
                 popupToDelete.close();
 
             })
             .catch((err)=>{console.log(err)})
+            .finally(()=>{
+                changeButtonText(modalToDeleteCard, 'Да')
+            })
 
     }});
 popupToDelete.setEventListeners()
-export {popupToDelete}
+
 
 let userId;
-export {userId}
+
 Promise.all([
     api.getCards(),
-    api.getCurrentUser(),
     api.getProfileInformation()
 ])
-    .then(([items, user, userInformation])=>{
-        userId = user._id;
+    .then(([items, userInformation])=>{
+        userId = userInformation._id;
         cardList.renderItems(items.reverse())
         userInfo.setUserInfo(userInformation)
     })
     .catch((err)=>{console.log(err)})
-export {api};
+
 
 const validatorFormToAddCard = new FormValidator(selectors, modalToAddCard)
 validatorFormToAddCard.enableValidation()

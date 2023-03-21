@@ -1,31 +1,25 @@
-import {popupToDelete, api} from "../pages/index.js";
-
 class Card {
 
-    constructor(data, tamplateSelector, selectors,  currentUserId, handleCardClick) {
+    constructor(data, tamplateSelector, selectors,  currentUserId, popupToDelete, handleCardClick, confirmDeleteCard, handleLikeClick) {
         this._cardName = data.name;
         this._cardUrl = data.link;
         this._likes = data.likes;
-
-        this._id = data._id
-        this.data = data
+        this.id = data._id
         this._tamplateSelector = tamplateSelector;
         this._element = this._getElementFromTemplate()
         this._elementPhoto = this._element.querySelector('.element__photo');
         this._elementLike = this._element.querySelector('.element__like-amount');
         this._handleCardClick = handleCardClick;
-
         this._isOwner = (data.owner._id === currentUserId)
         this._currentUserId = currentUserId
         this._cardDeleteSelector = selectors.trashButtonSelector;
         this._likeClassList = this._element.querySelector('.element__like').classList
-        this._deleteCard = this._deleteCard.bind(this);
-        this._likeCard = this._likeCard.bind(this);
+        this.confirmDeleteCard = confirmDeleteCard.bind(this);
+        this.handleLikeClick = handleLikeClick.bind(this);
     }
 
     isLiked(){
         let flag = false
-        //console.log(this._likes)
         this._likes.forEach((like)=> {
             if (like._id === this._currentUserId) {flag = true}
         })
@@ -41,8 +35,8 @@ class Card {
     }
 
     _addEventListeners() {
-        this._element.querySelector('.element__delete').addEventListener('click', this._deleteCard);
-        this._element.querySelector('.element__like').addEventListener('click', this._likeCard);
+        this._element.querySelector('.element__delete').addEventListener('click', ()=>this.confirmDeleteCard(this));
+        this._element.querySelector('.element__like').addEventListener('click', ()=>this.handleLikeClick(this));
 
         this._elementPhoto.addEventListener('click', () => {
 
@@ -50,38 +44,15 @@ class Card {
     }
 
 
-
-    _deleteCard() {
-        popupToDelete.open(this._id, this._element)
-        //this._element.remove();
+    _deleteCard(){
+        this._element.remove();
+        this._element = null;
     }
 
-    _likeCard() {
-        if (this.isLiked()) {
-            this._deleteLike()
-        }
-
-        else {
-            this._putLike()
-
-        }
-
-    }
-    _deleteLike (){
-        api.deleteLike(this._id).then(r => {
+    toggleLike(r){
             this._likes = r.likes
             this._elementLike.textContent = r.likes.length;
-            this._likeClassList.remove('element__like_active');
-
-        });
-    }
-
-    _putLike(){
-        api.likeCard(this._id).then(r => {
-            this._likes = r.likes
-            this._elementLike.textContent = r.likes.length;
-            this._likeClassList.add('element__like_active');
-        });
+            this._likeClassList.toggle('element__like_active');
     }
 
     getElement() {
@@ -95,8 +66,7 @@ class Card {
         }
         this._elementPhoto.src = this._cardUrl;
         this._elementPhoto.alt = this._cardName;
-        this._elementLike.textContent = this._likes.length
-        //console.log(this._likes)
+        this._elementLike.textContent = this._likes.length;
         this._addEventListeners();
         return this._element;
     }

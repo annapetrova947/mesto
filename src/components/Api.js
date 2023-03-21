@@ -32,12 +32,6 @@ export default class Api {
             .then(this._getJSON);
     }
 
-    getCurrentUser(){
-        return fetch(`${this._basePath}users/me`, {
-            headers: this._getHeaders()
-        }).then(this._getJSON);
-    }
-
     getProfileInformation (){
         return fetch(`${this._basePath}users/me`, {
             headers: this._getHeaders()

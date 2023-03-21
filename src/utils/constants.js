@@ -17,7 +17,7 @@ const selectors = {
 const modalToAddCard = document.querySelector('.modal_type_add')
 const modalToEditProfile = document.querySelector('.modal_type_edit')
 const modalToEditAvatar = document.querySelector('.modal_type_edit-avatar')
-
+const modalToDeleteCard = document.querySelector('.modal_type_delete')
 export {
     buttonForEditProfile,
     buttonForAddCard,
@@ -25,6 +25,7 @@ export {
     inputAbout,
     selectors,
     modalToAddCard,
+    modalToDeleteCard,
     modalToEditProfile,
     modalToEditAvatar,
     buttonForEditAvatar
